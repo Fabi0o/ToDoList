@@ -1,1 +1,1 @@
-(()=>{"use strict";let t=new class{title;description;dueDate;isComplete;constructor(t,e,a,s){this.title=t,this.description=e,this.dueDate=a,this.isComplete=s}}("aaa","aaaa","aaaa",!0);console.log(t)})();
+(()=>{"use strict";let t=new class{title;description;dueDate;isComplete;constructor(t,e,s){this.description=t,this.dueDate=e,this.isComplete=s}}("aaaa","aaaa",!0);console.log(t)})();

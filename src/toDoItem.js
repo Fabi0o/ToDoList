@@ -3,8 +3,7 @@ export class ToDoItem {
   description;
   dueDate;
   isComplete;
-  constructor(title, description, dueDate, isComplete) {
-    this.title = title;
+  constructor(description, dueDate, isComplete) {
     this.description = description;
     this.dueDate = dueDate;
     this.isComplete = isComplete;
