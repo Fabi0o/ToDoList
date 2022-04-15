@@ -1,0 +1,12 @@
+#wholeContent {
+  display: flex;
+  height: 100vh;
+}
+nav {
+  border-right: solid black 1px;
+}
+.listItem,
+.project {
+  display: flex;
+  justify-content: space-between;
+}

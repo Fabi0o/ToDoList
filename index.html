@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoList</title>
     <script src="./bundle.js"></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body></body>
+  <body>
+    <header><h1>ToDoList</h1></header>
+    <div id="wholeContent">
+      <nav>
+        <form id="projectAdder">
+          <label for="project">Add new project:</label>
+          <input type="text" placeholder="Name" />
+          <button>Add</button>
+        </form>
+        <div class="project">
+          <button class="projectName">Default project</button>
+          <button class="deleteButton">X</button>
+        </div>
+      </nav>
+      <div>
+        <form id="toDoAdder">
+          <label for="toDoItem">Add things to do to this project:</label>
+          <input type="text" placeholder="Description" />
+          <input type="date" />
+          <button>Add</button>
+        </form>
+        <div id="listContent">
+          <div class="listItem">
+            <input type="checkbox" />
+            <div class="description">Default list item</div>
+            <button class="deleteButton">X</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
