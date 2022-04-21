@@ -1,5 +1,4 @@
 export class ToDoItem {
-  title;
   description;
   dueDate;
   isComplete;
