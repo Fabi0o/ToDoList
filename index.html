@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoList</title>
-    <script src="./bundle.js"></script>
+    <script src="./bundle.js" defer></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -14,19 +14,21 @@
       <nav>
         <form id="projectAdder">
           <label for="project">Add new project:</label>
-          <input type="text" placeholder="Name" />
+          <input id="projectNameInput" type="text" placeholder="Name" />
           <button>Add</button>
         </form>
-        <div class="project">
-          <button class="projectName">Default project</button>
-          <button class="deleteButton">X</button>
+        <div id="projects">
+          <div class="project">
+            <button class="projectName">Default project</button>
+            <button class="deleteButton">X</button>
+          </div>
         </div>
       </nav>
       <div>
         <form id="toDoAdder">
           <label for="toDoItem">Add things to do to this project:</label>
-          <input type="text" placeholder="Description" />
-          <input type="date" />
+          <input type="text" placeholder="Description" id="descriptionInput" />
+          <input type="date" id="dueDateInput" />
           <button>Add</button>
         </form>
         <div id="listContent">
