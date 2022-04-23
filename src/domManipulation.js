@@ -1,4 +1,5 @@
 import { projects } from "./project";
+import { ToDoItem } from "./toDoItem";
 export const projectNameInput = document.querySelector("#projectNameInput");
 export const descriptionInput = document.querySelector("#descriptionInput");
 export const dueDateInput = document.querySelector("#dueDateInput");
@@ -6,6 +7,7 @@ export const toDoList = document.querySelector("#listContent");
 export const projectsList = document.querySelector("#projects");
 export const addProjectButton = document.querySelector("#addProjectButton");
 export const addToDoButton = document.querySelector("#addToDoButton");
+export const toDoAdder = document.querySelector("#toDoAdder");
 
 export const appendToDoItems = (projectNumber) => {
   const toDoItemsArr = projects.projectArr[projectNumber].toDoItems;
@@ -27,4 +29,11 @@ export const appendToDoItems = (projectNumber) => {
     listItem.append(checkbox, description, dueDate, deleteButton);
     toDoList.appendChild(listItem);
   });
+};
+export const addButtonFunctionality = (projectNumber) => {
+  const description = document.querySelector("#descriptionInput");
+  const dueDate = document.querySelector("#dueDateInput");
+  let toDoItem = new ToDoItem(description.value, dueDate.value, false);
+  const project = projects.projectArr[projectNumber];
+  project.addItem(toDoItem);
 };
