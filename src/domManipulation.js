@@ -24,15 +24,22 @@ export const appendToDoItems = (projectNumber) => {
     dueDate.classList.add("dueDate");
     dueDate.textContent = `Due date: ${toDoItem.dueDate}`;
     const deleteButton = document.createElement("button");
-    deleteButton.classList.add("deleteButton");
+    deleteButton.classList.add("itemDeleteButton");
     deleteButton.textContent = "X";
     listItem.append(checkbox, description, dueDate, deleteButton);
+    listItem.dataset.indexNumber = toDoItemsArr.indexOf(toDoItem);
     toDoList.appendChild(listItem);
   });
 };
 export const addButtonFunctionality = (projectNumber) => {
   const description = document.querySelector("#descriptionInput");
   const dueDate = document.querySelector("#dueDateInput");
+  if (!description.value || !dueDate.value) {
+    alert(
+      "To add item to To Do List first you need to fill description form and set a due date!"
+    );
+    return;
+  }
   let toDoItem = new ToDoItem(description.value, dueDate.value, false);
   const project = projects.projectArr[projectNumber];
   project.addItem(toDoItem);
