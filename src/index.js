@@ -1,20 +1,21 @@
 import { ToDoItem } from "./toDoItem";
 import {
-  addButtonFunctionality,
+  addItemButtonFunctionality,
   addToDoButton,
   appendToDoItems,
   toDoAdder,
   toDoList,
 } from "./domManipulation";
 import { Project, projects } from "./project";
+let currentProjectNumber = 0;
 addToDoButton.addEventListener("click", function () {
-  addButtonFunctionality(0);
+  addItemButtonFunctionality(currentProjectNumber);
   toDoList.innerHTML = "";
   toDoAdder.reset();
-  appendToDoItems(0);
+  appendToDoItems(currentProjectNumber);
 });
 let toDoItem = new ToDoItem("Default list item", `2022-06-30`, false);
 let defaultProject = new Project("defaultProject");
 defaultProject.addItem(toDoItem);
 projects.addProject(defaultProject);
-appendToDoItems(0);
+appendToDoItems(currentProjectNumber);

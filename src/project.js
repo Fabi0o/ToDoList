@@ -4,7 +4,7 @@ export let projects = (function () {
     projects.projectArr.push(project);
   }
   function removeProject(project) {
-    projects.projectArr.pop(project);
+    projects.projectArr.splice(project, 1);
   }
   return { projectArr, addProject, removeProject };
 })();
@@ -20,6 +20,6 @@ export class Project {
     // console.log(this.toDoItems);
   }
   removeItem(item) {
-    this.toDoItems.pop(item);
+    this.toDoItems.splice(item, 1);
   }
 }
