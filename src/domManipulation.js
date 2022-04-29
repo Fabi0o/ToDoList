@@ -1,15 +1,13 @@
 import { projects } from "./project";
 import { ToDoItem } from "./toDoItem";
-export const projectNameInput = document.querySelector("#projectNameInput");
-export const descriptionInput = document.querySelector("#descriptionInput");
-export const dueDateInput = document.querySelector("#dueDateInput");
-export const toDoList = document.querySelector("#listContent");
-export const projectsList = document.querySelector("#projects");
-export const addProjectButton = document.querySelector("#addProjectButton");
-export const addToDoButton = document.querySelector("#addToDoButton");
-export const toDoAdder = document.querySelector("#toDoAdder");
+const toDoList = document.querySelector("#listContent");
+const projectsList = document.querySelector("#projects");
+const addProjectButton = document.querySelector("#addProjectButton");
+const addToDoButton = document.querySelector("#addToDoButton");
+const toDoAdder = document.querySelector("#toDoAdder");
 
-export const appendToDoItems = (currentProjectNumber) => {
+const appendToDoItems = (currentProjectNumber) => {
+  toDoList.innerHTML = "";
   const toDoItemsArr = projects.projectArr[currentProjectNumber].toDoItems;
   toDoItemsArr.forEach((toDoItem) => {
     const listItem = document.createElement("div");
@@ -35,17 +33,22 @@ export const appendToDoItems = (currentProjectNumber) => {
   addCheckboxFunctionality(currentProjectNumber);
 };
 export const addItemButtonFunctionality = (currentProjectNumber) => {
-  const description = document.querySelector("#descriptionInput");
-  const dueDate = document.querySelector("#dueDateInput");
-  if (!description.value || !dueDate.value) {
-    alert(
-      "To add item to To Do List first you need to fill description form and set a due date!"
-    );
-    return;
-  }
-  let toDoItem = new ToDoItem(description.value, dueDate.value, false);
-  const project = projects.projectArr[currentProjectNumber];
-  project.addItem(toDoItem);
+  addToDoButton.addEventListener("click", () => {
+    const description = document.querySelector("#descriptionInput");
+    const dueDate = document.querySelector("#dueDateInput");
+    if (!description.value || !dueDate.value) {
+      alert(
+        "To add item to To Do List first you need to fill description form and set a due date!"
+      );
+      return;
+    }
+    let toDoItem = new ToDoItem(description.value, dueDate.value, false);
+    const project = projects.projectArr[currentProjectNumber];
+    project.addItem(toDoItem);
+    toDoAdder.reset();
+    appendToDoItems(currentProjectNumber);
+  });
+  appendToDoItems(currentProjectNumber);
 };
 const addDeleteButtonFunctionality = (currentProjectNumber) => {
   const buttons = document.querySelectorAll(".itemDeleteButton");
@@ -54,8 +57,6 @@ const addDeleteButtonFunctionality = (currentProjectNumber) => {
       projects.projectArr[currentProjectNumber].removeItem(
         button.parentElement.dataset.indexNumber
       );
-      toDoList.innerHTML = "";
-      toDoAdder.reset();
       appendToDoItems(currentProjectNumber);
     });
   });
@@ -73,7 +74,6 @@ const addCheckboxFunctionality = (currentProjectNumber) => {
           checkbox.parentElement.dataset.indexNumber
         ].isComplete = true;
       }
-      toDoList.innerHTML = "";
       appendToDoItems(currentProjectNumber);
     });
   });
