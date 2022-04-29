@@ -1,10 +1,11 @@
-import { projects } from "./project";
+import { Project, projects } from "./project";
 import { ToDoItem } from "./toDoItem";
 const toDoList = document.querySelector("#listContent");
 const projectsList = document.querySelector("#projects");
 const addProjectButton = document.querySelector("#addProjectButton");
 const addToDoButton = document.querySelector("#addToDoButton");
 const toDoAdder = document.querySelector("#toDoAdder");
+const projectAdder = document.querySelector("#projectAdder");
 // to do items functions
 const appendToDoItems = (currentProjectNumber) => {
   toDoList.innerHTML = "";
@@ -93,5 +94,18 @@ export const appendProjects = () => {
     projectDiv.append(projectName, deleteButton);
     projectDiv.dataset.indexNumber = projects.projectArr.indexOf(project);
     projectsList.appendChild(projectDiv);
+  });
+};
+export const addProjectButtonFunctionality = () => {
+  addProjectButton.addEventListener("click", () => {
+    const projectNameInput = document.querySelector("#projectNameInput");
+    if (!projectNameInput.value) {
+      alert("To add project first you have to fill a form!");
+      return;
+    }
+    const project = new Project(projectNameInput.value);
+    projects.addProject(project);
+    appendProjects();
+    projectAdder.reset();
   });
 };

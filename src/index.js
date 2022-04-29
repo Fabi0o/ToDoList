@@ -1,5 +1,9 @@
 import { ToDoItem } from "./toDoItem";
-import { addItemButtonFunctionality, appendProjects } from "./domManipulation";
+import {
+  addItemButtonFunctionality,
+  addProjectButtonFunctionality,
+  appendProjects,
+} from "./domManipulation";
 import { Project, projects } from "./project";
 let currentProjectNumber = 0;
 let toDoItem = new ToDoItem("Default list item", `2022-06-30`, false);
@@ -8,3 +12,4 @@ defaultProject.addItem(toDoItem);
 projects.addProject(defaultProject);
 addItemButtonFunctionality(currentProjectNumber);
 appendProjects();
+addProjectButtonFunctionality();
