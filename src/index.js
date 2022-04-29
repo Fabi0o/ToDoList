@@ -19,3 +19,10 @@ let defaultProject = new Project("defaultProject");
 defaultProject.addItem(toDoItem);
 projects.addProject(defaultProject);
 appendToDoItems(currentProjectNumber);
+// const checkbox = document.querySelector("input[type=checkbox]");
+// console.log(
+//   projects.projectArr[currentProjectNumber].toDoItems[
+//     checkbox.parentElement.dataset.indexNumber
+//   ]
+// );
+// console.log(checkbox.parentElement.dataset.indexNumber);

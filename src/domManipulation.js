@@ -17,6 +17,7 @@ export const appendToDoItems = (currentProjectNumber) => {
     const checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.checked = toDoItem.isComplete;
+    if (toDoItem.isComplete) listItem.classList.add("done");
     const description = document.createElement("div");
     description.classList.add("description");
     description.textContent = toDoItem.description;
@@ -31,6 +32,7 @@ export const appendToDoItems = (currentProjectNumber) => {
     toDoList.appendChild(listItem);
   });
   addDeleteButtonFunctionality(currentProjectNumber);
+  addCheckboxFunctionality(currentProjectNumber);
 };
 export const addItemButtonFunctionality = (currentProjectNumber) => {
   const description = document.querySelector("#descriptionInput");
@@ -54,6 +56,24 @@ const addDeleteButtonFunctionality = (currentProjectNumber) => {
       );
       toDoList.innerHTML = "";
       toDoAdder.reset();
+      appendToDoItems(currentProjectNumber);
+    });
+  });
+};
+const addCheckboxFunctionality = (currentProjectNumber) => {
+  let checkboxes = document.querySelectorAll("input[type=checkbox]");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", () => {
+      if (!checkbox.checked) {
+        projects.projectArr[currentProjectNumber].toDoItems[
+          checkbox.parentElement.dataset.indexNumber
+        ].isComplete = false;
+      } else {
+        projects.projectArr[currentProjectNumber].toDoItems[
+          checkbox.parentElement.dataset.indexNumber
+        ].isComplete = true;
+      }
+      toDoList.innerHTML = "";
       appendToDoItems(currentProjectNumber);
     });
   });
