@@ -5,7 +5,7 @@ const projectsList = document.querySelector("#projects");
 const addProjectButton = document.querySelector("#addProjectButton");
 const addToDoButton = document.querySelector("#addToDoButton");
 const toDoAdder = document.querySelector("#toDoAdder");
-
+// to do items functions
 const appendToDoItems = (currentProjectNumber) => {
   toDoList.innerHTML = "";
   const toDoItemsArr = projects.projectArr[currentProjectNumber].toDoItems;
@@ -76,5 +76,22 @@ const addCheckboxFunctionality = (currentProjectNumber) => {
       }
       appendToDoItems(currentProjectNumber);
     });
+  });
+};
+// projects function
+export const appendProjects = () => {
+  projectsList.innerHTML = "";
+  projects.projectArr.forEach((project) => {
+    const projectDiv = document.createElement("div");
+    projectDiv.classList.add("project");
+    const projectName = document.createElement("button");
+    projectName.classList.add("projectName");
+    projectName.textContent = project.title;
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("projectDeleteButton");
+    deleteButton.innerText = "X";
+    projectDiv.append(projectName, deleteButton);
+    projectDiv.dataset.indexNumber = projects.projectArr.indexOf(project);
+    projectsList.appendChild(projectDiv);
   });
 };
