@@ -7,9 +7,10 @@ const addToDoButton = document.querySelector("#addToDoButton");
 const toDoAdder = document.querySelector("#toDoAdder");
 const projectAdder = document.querySelector("#projectAdder");
 // to do items functions
-const appendToDoItems = (currentProjectNumber) => {
+const appendToDoItems = () => {
   toDoList.innerHTML = "";
-  const toDoItemsArr = projects.projectArr[currentProjectNumber].toDoItems;
+  const toDoItemsArr =
+    projects.projectArr[projects.currentProjectNumber].toDoItems;
   toDoItemsArr.forEach((toDoItem) => {
     const listItem = document.createElement("div");
     listItem.classList.add("listItem");
@@ -30,10 +31,10 @@ const appendToDoItems = (currentProjectNumber) => {
     listItem.dataset.indexNumber = toDoItemsArr.indexOf(toDoItem);
     toDoList.appendChild(listItem);
   });
-  addDeleteButtonFunctionality(currentProjectNumber);
-  addCheckboxFunctionality(currentProjectNumber);
+  addDeleteButtonFunctionality();
+  addCheckboxFunctionality();
 };
-export const addItemButtonFunctionality = (currentProjectNumber) => {
+export const addItemButtonFunctionality = () => {
   addToDoButton.addEventListener("click", () => {
     const description = document.querySelector("#descriptionInput");
     const dueDate = document.querySelector("#dueDateInput");
@@ -44,38 +45,38 @@ export const addItemButtonFunctionality = (currentProjectNumber) => {
       return;
     }
     let toDoItem = new ToDoItem(description.value, dueDate.value, false);
-    const project = projects.projectArr[currentProjectNumber];
+    const project = projects.projectArr[projects.currentProjectNumber];
     project.addItem(toDoItem);
     toDoAdder.reset();
-    appendToDoItems(currentProjectNumber);
+    appendToDoItems(projects.currentProjectNumber);
   });
-  appendToDoItems(currentProjectNumber);
+  appendToDoItems(projects.currentProjectNumber);
 };
-const addDeleteButtonFunctionality = (currentProjectNumber) => {
+const addDeleteButtonFunctionality = () => {
   const buttons = document.querySelectorAll(".itemDeleteButton");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      projects.projectArr[currentProjectNumber].removeItem(
+      projects.projectArr[projects.currentProjectNumber].removeItem(
         button.parentElement.dataset.indexNumber
       );
-      appendToDoItems(currentProjectNumber);
+      appendToDoItems(projects.currentProjectNumber);
     });
   });
 };
-const addCheckboxFunctionality = (currentProjectNumber) => {
+const addCheckboxFunctionality = () => {
   let checkboxes = document.querySelectorAll("input[type=checkbox]");
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("click", () => {
       if (!checkbox.checked) {
-        projects.projectArr[currentProjectNumber].toDoItems[
+        projects.projectArr[projects.currentProjectNumber].toDoItems[
           checkbox.parentElement.dataset.indexNumber
         ].isComplete = false;
       } else {
-        projects.projectArr[currentProjectNumber].toDoItems[
+        projects.projectArr[projects.currentProjectNumber].toDoItems[
           checkbox.parentElement.dataset.indexNumber
         ].isComplete = true;
       }
-      appendToDoItems(currentProjectNumber);
+      appendToDoItems(projects.currentProjectNumber);
     });
   });
 };
@@ -107,5 +108,17 @@ export const addProjectButtonFunctionality = () => {
     projects.addProject(project);
     appendProjects();
     projectAdder.reset();
+    changeProjectFunctionality();
+  });
+  changeProjectFunctionality();
+};
+const changeProjectFunctionality = () => {
+  const projectButtons = document.querySelectorAll(".projectName");
+  projectButtons.forEach((projectButton) => {
+    projectButton.addEventListener("click", () => {
+      projects.currentProjectNumber =
+        projectButton.parentElement.dataset.indexNumber;
+      appendToDoItems(projects.currentProjectNumber);
+    });
   });
 };
