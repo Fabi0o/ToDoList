@@ -44,6 +44,10 @@ export const addItemButtonFunctionality = () => {
       );
       return;
     }
+    if (!projects.projectArr[projects.currentProjectNumber]) {
+      alert("Firs add project to add things to do!");
+      return;
+    }
     let toDoItem = new ToDoItem(description.value, dueDate.value, false);
     const project = projects.projectArr[projects.currentProjectNumber];
     project.addItem(toDoItem);
@@ -81,7 +85,7 @@ const addCheckboxFunctionality = () => {
   });
 };
 // projects function
-export const appendProjects = () => {
+const appendProjects = () => {
   projectsList.innerHTML = "";
   projects.projectArr.forEach((project) => {
     const projectDiv = document.createElement("div");
@@ -96,6 +100,8 @@ export const appendProjects = () => {
     projectDiv.dataset.indexNumber = projects.projectArr.indexOf(project);
     projectsList.appendChild(projectDiv);
   });
+  changeProjectFunctionality();
+  deleteProjectButtonFunctionality();
 };
 export const addProjectButtonFunctionality = () => {
   addProjectButton.addEventListener("click", () => {
@@ -108,9 +114,11 @@ export const addProjectButtonFunctionality = () => {
     projects.addProject(project);
     appendProjects();
     projectAdder.reset();
-    changeProjectFunctionality();
+    // changeProjectFunctionality();
   });
-  changeProjectFunctionality();
+  appendProjects();
+  // changeProjectFunctionality();
+  deleteProjectButtonFunctionality();
 };
 const changeProjectFunctionality = () => {
   const projectButtons = document.querySelectorAll(".projectName");
@@ -119,6 +127,23 @@ const changeProjectFunctionality = () => {
       projects.currentProjectNumber =
         projectButton.parentElement.dataset.indexNumber;
       appendToDoItems(projects.currentProjectNumber);
+    });
+  });
+};
+const deleteProjectButtonFunctionality = () => {
+  const deleteButtons = document.querySelectorAll(".projectDeleteButton");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      projects.removeProject(button.parentElement.dataset.indexNumber);
+      if (!projects.projectArr[0]) {
+        appendProjects();
+        toDoList.innerHTML = "";
+        return;
+      } else if (projects.currentProjectNumber != 0) {
+        projects.currentProjectNumber -= 1;
+      }
+      appendProjects();
+      appendToDoItems();
     });
   });
 };
